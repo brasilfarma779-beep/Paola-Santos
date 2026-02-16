@@ -1,13 +1,17 @@
 
 import { GoogleGenAI } from "@google/genai";
 
-// Safe access to environment variables to prevent ReferenceError in browser
+// Acesso seguro às variáveis de ambiente para evitar ReferenceError no navegador
 const getApiKey = () => {
   try {
-    return process.env.API_KEY || "";
+    // Verifica se 'process' existe antes de tentar acessar 'env'
+    if (typeof process !== 'undefined' && process.env && process.env.API_KEY) {
+      return process.env.API_KEY;
+    }
   } catch (e) {
-    return "";
+    console.warn("Acesso a variáveis de ambiente falhou. A IA pode estar desativada.");
   }
+  return "";
 };
 
 const apiKey = getApiKey();
@@ -30,7 +34,7 @@ Se o usuário quiser agendar, informe que a equipe entrará em contato ou forne�
 
 export const getAssistantResponse = async (userMessage: string) => {
   if (!ai) {
-    return "No momento estou indisponível, mas você pode falar diretamente conosco no WhatsApp!";
+    return "No momento estou indisponível para chat, mas você pode falar diretamente conosco no WhatsApp clicando no botão ao lado!";
   }
 
   try {

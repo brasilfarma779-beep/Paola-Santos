@@ -1,0 +1,8 @@
+{
+  "name": "Dra. Paola Santos - Estética Avançada",
+  "description": "Landing page premium para Dra. Paola Santos, especialista em estética facial e odontológica.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
